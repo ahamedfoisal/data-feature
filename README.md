@@ -47,14 +47,8 @@ This project leverages two public APIs—**WeatherAPI** and **Wger API**—to pr
    ```
 
 ### 3. Set Up API Keys
-   Store your **WeatherAPI** and **Wger API** keys in the `userdata` object in Google Colab or locally in a `.env` file:
-   ```python
-   from google.colab import userdata
-   userdata = {
-       'weather_api': 'YOUR_WEATHER_API_KEY',
-       'wger_password': 'YOUR_WGER_PASSWORD'
-   }
-   ```
+   Store your **WeatherAPI** and **Wger API** keys in Google Colab or locally in a `.env` file:
+
 
 ### 4. Running the Program
    Run the main script and enter your location when prompted to receive weather data and exercise recommendations:
