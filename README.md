@@ -1,8 +1,4 @@
 
-
-
-
-
 # Weather-Based Exercise Recommendation System
 
 This project leverages two public APIs—**WeatherAPI** and **Wger API**—to provide personalized exercise recommendations based on the current weather conditions. The goal of this feature is to help users decide whether to work out indoors or outdoors, depending on the weather.
@@ -14,22 +10,70 @@ This project leverages two public APIs—**WeatherAPI** and **Wger API**—to pr
 - Removes HTML tags from exercise descriptions to ensure clean and readable output.
 
 ## APIs Used
-1. **[WeatherAPI](https://www.weatherapi.com/)**
+1. **[WeatherAPI](https://www.weatherapi.com/)**:
    - Provides real-time weather conditions, including temperature, precipitation, and more.
    - API is used to determine whether the weather is suitable for outdoor or indoor exercise.
 
-2. **[Wger API](https://wger.de/en/software/api)**
+2. **[Wger API](https://wger.de/en/software/api)**:
    - A fitness API that provides a collection of exercises.
    - API is used to suggest relevant exercises based on the weather.
 
 ## Prerequisites
 
 1. **API Keys**:
-   - **WeatherAPI**: You will need an API key from [WeatherAPI](https://www.weatherapi.com/signup.aspx). Once you have the key, store it in your `userdata`.
-   - **Wger API**: If you want to access private endpoints (like personal workout plans), you’ll need your Wger account credentials. Otherwise, public endpoints (like exercises) are accessible without authentication.
+   To use this project, you will need API keys for both the **WeatherAPI** and the **Wger API**. These API keys should **not** be hardcoded into the Colab notebook. Instead, you can provide them at runtime using Google Colab's `userdata` or store them securely using environment variables.
 
-2. **Google Colab or Local Environment**:
-   - This project was developed using **Google Colab**. However, you can run it locally in any Python environment as long as you install the necessary dependencies.
+   - **WeatherAPI Key**: 
+     - API Key: `9764fc07b2204b4db21161835241909`
+   - **Wger Password**:
+     - Username: `ahamedfoisal`
+     - Password: `9FTgfQDXv!xbydr`
+
+### Secure API Key Handling in Google Colab:
+
+To prevent exposing your API keys, follow these steps:
+
+1. **Storing Keys in Google Colab**:
+   - When running the notebook, you will be prompted to enter your API keys.
+   - Run the following code to input your keys at runtime securely:
+     ```python
+     from google.colab import userdata
+     
+     # Input your API keys
+     weather_api_key = input('Enter your WeatherAPI key: ')
+     wger_password = input('Enter your Wger API password: ')
+     
+     # Store them securely in Colab's userdata
+     userdata['weather_api'] = weather_api_key
+     userdata['wger_password'] = wger_password
+     ```
+
+2. **Using API Keys in the Notebook**:
+   - In the notebook, you can retrieve the keys securely without hardcoding them:
+     ```python
+     WEATHER_API_KEY = userdata.get('weather_api')
+     WGER_PASSWORD = userdata.get('wger_password')
+     ```
+
+3. **Setting API Keys in `.env` File** (Optional):
+   If you're running this locally, you can also store your API keys in an environment file `.env` to keep them secure.
+
+   - Create a `.env` file with the following contents:
+     ```
+     WEATHER_API_KEY=9764fc07b2204b4db21161835241909
+     WGER_PASSWORD=9FTgfQDXv!xbydr
+     ```
+
+   - Use the `python-dotenv` package to load the keys:
+     ```python
+     from dotenv import load_dotenv
+     import os
+
+     load_dotenv()
+
+     WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')
+     WGER_PASSWORD = os.getenv('WGER_PASSWORD')
+     ```
 
 ## Setup and Running the Project
 
@@ -46,11 +90,7 @@ This project leverages two public APIs—**WeatherAPI** and **Wger API**—to pr
    pip install requests
    ```
 
-### 3. Set Up API Keys
-   Store your **WeatherAPI** and **Wger API** keys in Google Colab or locally in a `.env` file:
-
-
-### 4. Running the Program
+### 3. Run the Program
    Run the main script and enter your location when prompted to receive weather data and exercise recommendations:
    ```python
    python weather_exercise.py
@@ -63,7 +103,7 @@ This project leverages two public APIs—**WeatherAPI** and **Wger API**—to pr
 
    The script will display the current weather, and based on that, suggest either indoor or outdoor exercises.
 
-### 5. Error Handling
+### 4. Error Handling
    The code handles common issues like:
    - Invalid API keys.
    - Location not found.
@@ -84,10 +124,4 @@ Description: Stand with your feet shoulder-width apart, then lower your body as 
 ```
 
 
-
----
-
-By following the steps and providing your API keys, you can get weather-based exercise recommendations based on real-time weather data.
-
-```
 
